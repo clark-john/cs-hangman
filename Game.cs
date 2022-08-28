@@ -1,4 +1,5 @@
 using Hangman.Utils;
+using Hangman.PluginsManager;
 
 namespace Hangman;
 
@@ -13,7 +14,7 @@ static class ConsoleUtils
 	public static void WriteColor(
 			string str, 
 			ConsoleColor color, 
-			bool noNewLine
+			bool noNewLine = false
 		)
 	{
 		Console.ForegroundColor = color;
@@ -28,8 +29,15 @@ static class ConsoleUtils
 
 sealed class Game
 {
+	private void BeforeStart()
+	{
+		Manager man = new();
+		List<string> plugins = man.GetPluginsFromDirectory("./plugins");
+		man.LoadAllPlugins(plugins);
+	}
 	async public Task Start()
 	{
+		BeforeStart();
 		Console.WriteLine("Hangman v1.0.0");
 
 		CategoryGenerator cg = new CategoryGenerator();
@@ -62,7 +70,7 @@ sealed class Game
 			// when the game finished
 			if (container.All(Letters.GuessedLetters)) 
 			{ 
-				ConsoleUtils.WriteColor("\nComplete!", ConsoleColor.Green, false);
+				ConsoleUtils.WriteColor("\nComplete!", ConsoleColor.Green);
 				int BonusPoints = Scores.lives * 100;
 				Console.WriteLine($"Score: {Scores.score + BonusPoints}");
 				Console.WriteLine($"Lives: {Scores.lives} (+{BonusPoints} points)");
@@ -103,10 +111,10 @@ sealed class Game
 			int ResponseCode = v.validate(input);
 			if (ResponseCode <= 9 && ResponseCode > 0) {
 				if (ResponseCode == 5) {
-					ConsoleUtils.WriteColor(v.error(ResponseCode), ConsoleColor.Red, false);
+					ConsoleUtils.WriteColor(v.error(ResponseCode), ConsoleColor.Red);
 					Console.WriteLine($"Lives remaining: {Scores.lives}");
 				} else {
-					ConsoleUtils.WriteColor(v.error(ResponseCode), ConsoleColor.Yellow, false);
+					ConsoleUtils.WriteColor(v.error(ResponseCode), ConsoleColor.Yellow);
 				}
 			} else {
 				Console.WriteLine(v.success(ResponseCode));

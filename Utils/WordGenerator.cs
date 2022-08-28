@@ -2,7 +2,6 @@ namespace Hangman.Utils;
 
 class WordGenerator
 {
-	private Random r = new Random();
 	private WordFetcher wf = new WordFetcher();
 
 	async public Task<string> Generate(string hg) {

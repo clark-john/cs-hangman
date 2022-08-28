@@ -2,3 +2,6 @@ bin
 obj
 implicitusing.txt
 *.bat
+
+# in development
+plugins

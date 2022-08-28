@@ -3,9 +3,14 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>cs_hangman</RootNamespace>
+    <RootNamespace>Hangman</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Title>C# Hangman</Title>
+    <Description>simple game</Description>
+    <Authors>Clark</Authors>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
 </Project>
