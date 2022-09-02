@@ -1,14 +1,15 @@
+using static Hangman.Utils.SnakeToTitle;
+
 namespace Hangman.Utils;
 
 class WordFetcher
 {
 	public List<string> GetCategories(string[] urls)
 	{
-		SnakeToTitle stt = new SnakeToTitle();
 		List<string> categories = new List<string>();
 
 		foreach (string x in urls) {
-			string f = stt.SnakeToTitleCase((x.Substring(63)).Replace(".txt", ""));
+			string f = SnakeToTitleCase((x.Substring(63)).Replace(".txt", ""));
 			categories.Add(f);
 		}
 		return categories;

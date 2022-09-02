@@ -2,6 +2,7 @@ namespace Hangman.Utils;
 
 static class Letters
 {
+	// public static 
 	public static List<string> WrongLetters = new List<string>();
 	public static List<string> GuessedLetters = new List<string>();
 }

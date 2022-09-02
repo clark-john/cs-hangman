@@ -12,17 +12,17 @@ class InputValidator
 
 	// returns a response code
 
-	/** 
-	 * error code
-	 * 1 -> empty input
-	 * 2 -> letter already guessed
-	 * 3 -> contains symbols
-	 * 4 -> not a letter
-	 * 5 -> wrong letter
-	 * 
-	 * success codes
-	 * 10 -> correct letter
-	*/
+	///	<summary>
+	/// error code
+	/// 1 -> empty input
+	/// 2 -> letter already guessed
+	/// 3 -> contains symbols
+	/// 4 -> not a letter
+	/// 5 -> wrong letter
+	/// 
+	/// success codes
+	/// 10 -> correct letter
+	/// </summary>
 	public int validate(string? input)
 	{
 		if (String.IsNullOrWhiteSpace(input)) {
@@ -56,25 +56,14 @@ class InputValidator
 		}
 	}
 	// returns error message from a specific errorcode
-	public string error(int errorCode)
-	{
-		switch (errorCode)
-		{
-			case 1:
-				return "Letter cannot be empty.";
-			case 2:
-				return "Letter already guessed.";	
-			case 3:
-				return "Not a word.";
-			case 4:
-				return "Cannot be a special character.";
-			case 5:
-				return "Wrong letter.";
-			default:
-				return "";
-		}
-	}
-	
+	public string error(int errorCode) => errorCode switch {
+		1 => "Letter cannot be empty.",
+		2 => "Letter already guessed.",
+		3 => "Not a word.",
+		4 => "Cannot be a special character.",
+		5 => "Wrong letter.",
+		_ => "",
+	};
 	public string success(int successCode)
 	{
 		switch (successCode) 
